@@ -15,9 +15,9 @@ type Quest struct {
 // Player Table structure
 type Player struct {
 	ID        uint      `json:"id" gorm:"primary_key"`
-	Class     string    `json:"title"`
-	Name      string    `json:"description"`
-	Level     int       `json:"reward"`
+	Class     string    `json:"class"`
+	Name      string    `json:"name"`
+	Level     int       `json:"level"`
 	CreatedAt time.Time `json:"created_at"`
 	UpdatedAt time.Time `json:"updated_at"`
 }

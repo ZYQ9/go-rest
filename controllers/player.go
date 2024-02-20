@@ -38,9 +38,12 @@ func GetPlayer(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(player)
 }
 
-/* -------------------------------
+/*
+	-------------------------------
+
 Create a player
-----------------------------------*/
+----------------------------------
+*/
 
 // Sets the required fields for the player
 type PlayerInput struct {
@@ -55,17 +58,18 @@ func CreatePlayer(w http.ResponseWriter, r *http.Request) {
 	// Read the request body and parse
 	body, _ := ioutil.ReadAll(r.Body)
 	_ = json.Unmarshal(body, &input)
+
 	validate = validator.New()
 	err := validate.Struct(input)
 
 	// Error handling for the request body
 	if err != nil {
-		utils.RespondWithError(w, http.StatusBadRequest, err.Error())
+		utils.RespondWithError(w, http.StatusBadRequest, "Validation Error")
 		return
 	}
 
 	// Create a new player
-	player := models.Player{
+	player := &models.Player{
 		Class: input.Class,
 		Name:  input.Name,
 		Level: input.Level,
