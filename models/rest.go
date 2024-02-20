@@ -10,3 +10,12 @@ type Quest struct {
 	CreatedAt   time.Time `json:"created_at"`
 	UpdatedAt   time.Time `json:"updated_at"`
 }
+
+type Player struct {
+	ID        uint      `json:"id" gorm:"primary_key"`
+	Class     string    `json:"title"`
+	Name      string    `json:"description"`
+	Level     int       `json:"reward"`
+	CreatedAt time.Time `json:"created_at"`
+	UpdatedAt time.Time `json:"updated_at"`
+}
