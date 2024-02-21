@@ -23,7 +23,7 @@ type Player struct {
 }
 
 // Assigned Quests Table structure
-type AssignedQuest struct {
+type Assigned struct {
 	ID        uint     `json:"id" gorm:"primary_key"`
 	PlayerID  []Player `json:"player_id" gorm:"foreignkey:PID"`
 	QuestID   []Quest  `json:"quest_id" gorm:"foreignkey:QID"`

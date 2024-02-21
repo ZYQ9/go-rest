@@ -13,7 +13,7 @@ import (
 func GetAllAssignments(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
-	var assignments []models.AssignedQuest
+	var assignments []models.Assigned
 	models.DB.Find(&assignments)
 
 	json.NewEncoder(w).Encode(assignments)
@@ -23,7 +23,7 @@ func GetAssignment(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
 	id := mux.Vars(r)["id"]
-	var assignment models.AssignedQuest
+	var assignment models.Assigned
 
 	if err := models.DB.Where("id = ?", id).First(&assignment).Error; err != nil {
 		utils.RespondWithError(w, http.StatusNotFound, "Assigned Quest not found")
@@ -34,18 +34,18 @@ func GetAssignment(w http.ResponseWriter, r *http.Request) {
 }
 
 // Assign a quest
-type AssignedQuestInput struct {
+type AssignedInput struct {
 	PlayerID []models.Player `json:"player_id" validate:"required"`
 	QuestID  []models.Quest  `json:"quest_id" validate:"required"`
 }
 
 func AssignQuest(w http.ResponseWriter, r *http.Request) {
-	var input AssignedQuestInput
+	var input AssignedInput
 
 	body, _ := ioutil.ReadAll(r.Body)
 	_ = json.Unmarshal(body, &input)
 
-	assignment := models.AssignedQuest{
+	assignment := models.Assigned{
 		PlayerID: input.PlayerID,
 		QuestID:  input.QuestID,
 	}
