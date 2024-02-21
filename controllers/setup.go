@@ -22,5 +22,9 @@ func New() http.Handler {
 	router.HandleFunc("/players/{id}", UpdatePlayer).Methods("PUT")
 	router.HandleFunc("/players/{id}", DeletePlayer).Methods("DELETE")
 
+	router.HandleFunc("/assignments", GetAllAssignments).Methods("GET")
+	router.HandleFunc("/assignments/{id}", GetAssignment).Methods("GET")
+	router.HandleFunc("/assignments", AssignQuest).Methods("POST")
+
 	return router
 }
